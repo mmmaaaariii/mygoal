@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2024_08_22_104359) do
     t.string "title", null: false
     t.text "content", null: false
     t.integer "user_id"
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,4 +1,9 @@
-<!-- ユーザーの詳細 -->
+<h2>My Page</h2>
 <div>
   <h3><%= @user.name %></h3>
+  <%= image_tag @user.get_profile_image(100,100) %>
+  <% if @user == current_user %>
+    <p><%= link_to "Profile Edit", edit_user_path(@user) %></p>
+  <% end %>
+  <p><%=link_to "Post Index", posts_path(@user)%></p>
 </div>
