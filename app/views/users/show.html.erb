@@ -5,5 +5,12 @@
   <% if @user == current_user %>
     <p><%= link_to "Profile Edit", edit_user_path(@user) %></p>
   <% end %>
-  <p><%=link_to "Post Index", posts_path(@user)%></p>
 </div>
+
+<% @posts.each do |post| %>
+  <div>
+    <h4><%= post.title %></h4>
+    <p><%= post.content %></p>
+    <%= link_to "Edit", edit_post_path(post) %>
+  </div>
+<% end %>

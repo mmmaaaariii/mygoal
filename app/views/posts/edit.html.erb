@@ -1,2 +1,16 @@
-<h1>Posts#edit</h1>
-<p>Find me in app/views/posts/edit.html.erb</p>
+<h1>Edit</h1>
+<%= form_for @post, html: { multipart: true } do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+  <div>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+  <%= f.submit "Update" %>
+<% end %>
