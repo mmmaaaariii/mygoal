@@ -3,7 +3,8 @@
   <h3><%= @user.name %></h3>
   <%= image_tag @user.get_profile_image(100,100) %>
   <% if @user == current_user %>
-    <p><%= link_to "Profile Edit", edit_user_path(@user) %></p>
+    <%= link_to "Profile Edit", edit_user_path(@user) %>
+    <%= link_to "Withdrawal", user_path(@user), method: :delete, data: {confirm: "本当にアカウントを削除しますか？"} %>
   <% end %>
 </div>
 

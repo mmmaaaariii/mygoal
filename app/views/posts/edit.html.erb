@@ -1,4 +1,14 @@
 <h1>Edit</h1>
+
+<% if @post.errors.any? %>
+  <%= @post.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_for @post, html: { multipart: true } do |f| %>
   <div>
     <%= f.label :title %>
@@ -14,3 +24,6 @@
   </div>
   <%= f.submit "Update" %>
 <% end %>
+
+<%= link_to "Delete", post_path(@post), method: :delete %>
+<%= link_to @post.status, post_toggle_status_path(@post), method: :patch %>
