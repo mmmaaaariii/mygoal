@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         patch :toggle_status
         resource :favorite, only: [:create, :destroy]
         resources :post_comments, only: [:create, :destroy]
+        get 'search_results', on: :collection
     end
     resources :users, only: [:show, :edit, :update, :destroy]
 

@@ -29,5 +29,13 @@ class Post < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
+  
+    def self.search(search)
+      if search
+        where('title LIKE ? OR content LIKE ? OR user_id IN (SELECT id FROM users WHERE name LIKE ?)', "%#{search}%", "%#{search}%", "%#{search}%")
+      else
+        all
+      end
+    end
     
 end

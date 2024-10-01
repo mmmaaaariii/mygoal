@@ -1,0 +1,15 @@
+<h1>検索結果</h1>
+
+<% @posts.each do |post| %>
+  <div class="post">
+    <h3><%= post.title %></h3>
+    <p><%= post.content %></p>
+    <p>Created by <%= post.user.name %></p>
+  </div>
+<% end %>
+
+<% @users.each do |user| %>
+  <div class="user">
+    <h3><%= user.name %></h3>
+  </div>
+<% end %>

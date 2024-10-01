@@ -52,6 +52,20 @@ class PostsController < ApplicationController
     post.destroy
     redirect_to posts_path
   end
+  
+  def index
+    if params[:search]
+      @posts = Post.search(params[:search])
+    else
+      @posts = Post.where(status: "published")
+    end
+  end
+  
+  def search_results
+    @posts = Post.search(params[:search])
+    @users = User.search(params[:search])
+    render 'search_results'
+  end
 
 
 

@@ -18,5 +18,13 @@ validates :name, :email, presence: true
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
   
+  def self.search(search)
+    if search
+      where('name LIKE ?', "%#{search}%")
+    else
+      all
+    end
+  end
+  
 
 end
