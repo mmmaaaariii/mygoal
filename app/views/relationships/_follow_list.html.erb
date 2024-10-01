@@ -1,0 +1,13 @@
+<h1>フォロー一覧</h1>
+  <div>
+    <% if @users.present? %>
+      <% @users.each do |user| %>
+        <p><%= user.name %></p>
+        <p>フォロー数: <%= user.followings.count %></p>
+        <p>フォロワー数: <%= user.followers.count %></p>
+      <% end %>
+  </div>
+    <% else %>
+    <p>ユーザーはいません</p>
+<% end %>
+  

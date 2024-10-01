@@ -2,7 +2,16 @@
 <div>
   <h3><%= @user.name %></h3>
   <%= image_tag @user.get_profile_image(100,100) %>
+  
+  <% if current_user.following?(@user) %>
+    <%= link_to "フォロー外す", user_relationships_path(@user.id), method: :delete %>
+  <% else %>
+    <%= link_to "フォローする", user_relationships_path(@user.id), method: :post %>
+  <% end %>
+  
   <% if @user == current_user %>
+    <%= link_to 'MyPage', user_path(current_user.id) %>
+    <%= render 'relationships/follow_list' %>
     <%= link_to "Profile Edit", edit_user_path(@user) %>
     <%= link_to "Withdrawal", user_path(@user), method: :delete, data: {confirm: "本当にアカウントを削除しますか？"} %>
   <% end %>
