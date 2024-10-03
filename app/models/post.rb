@@ -7,7 +7,7 @@ class Post < ApplicationRecord
     
     
     enum status: { draft: 0, published: 1 }
-    validates :title, :content, :status, presence: true
+    validates :content, :status, presence: true
     validates :status, inclusion: { in: Post.statuses.keys }
     
     def toggle_status!
@@ -30,12 +30,13 @@ class Post < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
   
-    def self.search(search)
-      if search
-        where('title LIKE ? OR content LIKE ? OR user_id IN (SELECT id FROM users WHERE name LIKE ?)', "%#{search}%", "%#{search}%", "%#{search}%")
-      else
-        all
-      end
+  def self.search(search)
+    if search
+      where('title LIKE ? OR content LIKE ? OR user_id IN (SELECT id FROM users WHERE name LIKE ?)', "%#{search}%", "%#{search}%", "%#{search}%")
+    else
+      all
     end
+  end
+  
     
 end

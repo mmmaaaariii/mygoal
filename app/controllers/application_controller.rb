@@ -14,6 +14,12 @@ class ApplicationController < ActionController::Base
     @articles = Article.all.search(params[:search])
   end
   
+  private
+ 
+  def admin_controller?
+    self.class.module_parent_name == 'Admin'
+  end
+  
   protected
 
   def configure_permitted_parameters

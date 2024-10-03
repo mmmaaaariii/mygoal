@@ -66,9 +66,7 @@ class PostsController < ApplicationController
     @users = User.search(params[:search])
     render 'search_results'
   end
-
-
-
+  
   private
 
   def post_params
