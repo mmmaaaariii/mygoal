@@ -1,4 +1,4 @@
-class RelationshipsController < ApplicationController
+class Public::RelationshipsController < ApplicationController
   # フォローするとき
   def create
     current_user.follow(params[:user_id])

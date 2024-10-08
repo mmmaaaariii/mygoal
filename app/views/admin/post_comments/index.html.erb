@@ -1,0 +1,9 @@
+<h1>コメント一覧</h1>
+<ul>
+  <% @post_comments.each do |post_comment| %>
+    <li>
+      <%= post_comment.user.name %> - <%= post_comment.user.email %> - <%= post_comment.comment %>
+      <%= link_to '削除', admin_post_comment_path(post_comment), method: :delete, data: { confirm: '本当に削除しますか？' } %>
+    </li>
+  <% end %>
+</ul>

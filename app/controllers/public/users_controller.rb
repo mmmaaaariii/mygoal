@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Public::UsersController < ApplicationController
   
   def show
     @user = User.find_by(id: params[:id])

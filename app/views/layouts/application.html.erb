@@ -5,25 +5,66 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/ef37b76ac6.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
-    <header>
-      <h1><a href="/">継続はちから</a></h1>
-      <% if user_signed_in? %>
-        <li><%= link_to 'About', about_path %></li>
-        <li><%= link_to 'Postindex', posts_path %></li>
-        <li><%= link_to 'Newpost', new_post_path %></li>
-        <li><%= link_to 'MyPage', user_path(current_user.id) %></li>
-        <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-      <% else %>
-        <li><%= link_to "signup", new_user_registration_path %></li>
-        <li><%= link_to "Login", new_user_session_path %></li>
-      <% end %>
+        <header class="shadow-sm">
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container d-flex justify-content-center align-items-center">
+              <a class="navbar-brand p-3" href="/">
+                <%= image_tag('logo.png', width: '90pt', height: '90pt') %>
+              </a>
+
+              <%= form_tag(search_results_posts_path, method: :get, class: "form-inline my-2 my-lg-0") do %>
+                <%= text_field_tag :search, params[:search], class: "form-control mr-sm-2", placeholder: "投稿をさがそう", aria: { label: "検索" } %>
+                <%= submit_tag "検索", class: "btn btn-outline-success my-2 my-sm-0", name: nil %>
+              <% end %>
+
+              <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <% if user_signed_in? %>
+                  <li class="nav-item"><%= link_to '新規投稿', new_post_path, class: 'nav-link text-dark' %></li>
+                  <li class="nav-item"><%= link_to '投稿一覧', posts_path, class: 'nav-link text-dark' %></li>
+                  <li class="nav-item"><%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-dark' %></li>
+                  <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %></li>
+                <% else %>
+                  <li class="nav-item"><%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %></li>
+                  <li class="nav-item"><%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </nav>
     </header>
+    <main class="mb-auto">
     <%= yield %>
+    </main>
+    <footer class="bg-dark text-white pt-5 pb-4">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <%= image_tag('logo.png', width: '80pt', height: '80pt') %>
+          </div>
+          <div class="col-md-8">
+            <h6 class="text-white mt-2 mb-3">Link</h6>
+            <ul class="p-0 list-unstyled">
+              <li>
+                <a href="homes/about" class="text-white-50">サイトについて</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
