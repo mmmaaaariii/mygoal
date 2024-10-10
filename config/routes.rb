@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-    
+  
   devise_for :admin, skip: [:registrations, :password], controllers: {
     sessions: 'admin/sessions'
   }
@@ -28,6 +28,9 @@ Rails.application.routes.draw do
         get 'followings' => 'relationships#followings', as: 'followings'
         get 'followers' => 'relationships#followers', as: 'followers'
     end
+    
+    resources :groups, only: [:new, :index, :show, :create, :edit, :update]
+    
   end
 
 end

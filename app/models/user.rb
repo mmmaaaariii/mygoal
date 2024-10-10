@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  validates :name, :email, :password, presence: true
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   
@@ -7,8 +9,6 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   has_many :favorites, dependent: :destroy
 
-  validates :name, :email, presence: true
-
   # フォローをした、されたの関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
@@ -16,6 +16,9 @@ class User < ApplicationRecord
   # 一覧画面で使う
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
+  
+  #グループ機能で使う
+  has_many :group_users, dependent: :destroy
 
 
   

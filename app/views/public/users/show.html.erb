@@ -15,6 +15,10 @@
     <%= link_to "Profile Edit", edit_user_path(@user) %>
     <%= link_to "Withdrawal", user_path(@user), method: :delete, data: {confirm: "本当にアカウントを削除しますか？"} %>
   <% end %>
+  
+  <%=link_to "グループを作成する",new_group_path %> | 
+  <%=link_to "グループ一覧",groups_path %>
+  
 </div>
 
 <% @posts.each do |post| %>
