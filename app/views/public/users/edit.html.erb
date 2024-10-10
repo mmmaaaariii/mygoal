@@ -17,3 +17,7 @@
   <%= f.file_field :profile_image, placeholder: "Profile Image", accept: "image/*" %>  
   <%= f.submit "Post" %>
 <% end %>
+
+
+<%= link_to "退会する", user_path(@user), method: :delete, data: {confirm: "本当にアカウントを削除しますか？"} %>
+

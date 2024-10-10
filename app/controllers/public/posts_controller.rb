@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :toggle_status]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def new
     @post = Post.new
@@ -10,14 +10,12 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
+      flash[:notice] = "投稿に成功しました。"
       redirect_to posts_path
     else
+      flash[:notice] = "投稿に失敗しました。"
       render :new
     end
-  end
-
-  def index
-     @posts = Post.where(status: "published")
   end
 
   def show
@@ -30,11 +28,6 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-
-  def toggle_status
-    @post.toggle_status!
-    redirect_to @post, notice: 'Post was successfully updated.'
-  end
 
 
   def update
@@ -52,25 +45,25 @@ class Public::PostsController < ApplicationController
     post.destroy
     redirect_to posts_path
   end
-  
+
   def index
     if params[:search]
       @posts = Post.search(params[:search])
     else
-      @posts = Post.where(status: "published")
+      @posts = Post.all
     end
   end
-  
+
   def search_results
     @posts = Post.search(params[:search])
     @users = User.search(params[:search])
     render 'search_results'
   end
-  
+
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :image, :status)
+    params.require(:post).permit(:title, :content, :image)
   end
 
   def set_post

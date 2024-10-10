@@ -1,13 +1,19 @@
-<style>
-  .form-container {
-    padding: 50px;
-  }
-</style>
-
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  <title>ログイン</title>
+  <style>
+    .form-container { 
+      padding: 50px; 
+    }
+  </style>
+</head>
+<body>
 <div class="row justify-content-center">
   <div class="col-md-5 form-container">
-    <h3 class="page-header">ログイン画面</h3>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-horizontal" }) do |f| %>
+    <h3 class="page-header">ログイン</h3>
+    <%= form_with(model: resource,as: resource_name, url: session_path(resource_name), html: { class: "form-horizontal" }) do |f| %>
       <div class="form-group">
         <p><%= f.label :email , "メールアドレス"%></p>
         <p><%= f.email_field :email, class: "form-control" %></p>
@@ -22,3 +28,5 @@
     <% end %>
   </div>
 </div>
+</body>
+</html>

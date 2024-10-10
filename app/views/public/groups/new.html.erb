@@ -4,25 +4,25 @@
     <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
       <h5 class="text-dark bg-light p-4 mb-0">新規投稿</h5>
       <div class="form-body p-4">
-        <% if @post.errors.any? %>
+        <% if @group.errors.any? %>
           <ul class="alert alert-danger" role="alert">
             <h6 class="alert-heading">
-              <%= @post.errors.count %>件のエラーが発生しました
+              <%= @group.errors.count %>件のエラーが発生しました
             </h6>
-            <% @post.errors.full_messages.each do |message| %>
+            <% @group.errors.full_messages.each do |message| %>
               <li><%= message %></li>
             <% end %>
           </ul>
         <% end %>
-        <%= form_with model: @post do |f| %>
+        <%= form_with model: @group do |f| %>
           
           <div class="input-group mb-3 mt-4">
-            <%= f.text_field :title, class: "form-control", placeholder: "タイトル" %>
+            <%= f.text_field :name, class: "form-control", placeholder: "name" %>
           </div>
-          <%= f.text_area :content, class: "form-control", rows: "3", placeholder: "投稿" %>
-          <%= f.file_field :image, accept: "image/*", class: "w-100" %>
+          <%= f.text_area :introduction, class: "form-control", rows: "3", placeholder: "introduction" %>
+          <%= f.file_field :group_image, accept: "image/*", class: "w-100" %>
           <hr>
-          <%= f.submit '投稿', class: "btn btn-lg btn-block btn-info mt-4" %>
+          <%= f.submit 'create', class: "btn btn-lg btn-block btn-info mt-4" %>
         <% end %>
       </div>
     </div>

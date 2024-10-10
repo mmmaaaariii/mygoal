@@ -5,6 +5,13 @@
           draft: "非公開" # enumで番号と紐付けた要素
           published: "公開" # enumで番号と紐付けた要素
     activerecord:
+      models:
+        post: "投稿"
+      attributes:
+        user:
+          name: test
+        post:
+          title: "タイトル"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

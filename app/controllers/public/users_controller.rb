@@ -1,12 +1,15 @@
 class Public::UsersController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update]
   
   def show
-    @user = User.find_by(id: params[:id])
-    if @user
-      @posts = @user.posts
-    else
-      redirect_to root_path, notice: "ユーザーが見つかりません"
-    end
+    @user = User.find(params[:id])
+    @posts = @user.posts.page(params[:page])
+    @followings = @user.followings
+  end
+  
+  def index
+    
+    
   end
 
   def edit
@@ -32,7 +35,14 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :profile_image)
+    params.require(:user).permit(:name, :profile_image)
+  end
+  
+  def is_matching_login_user
+    user = User.find(params[:id])
+    unless user.id == current_user.id
+      redirect_to posts_path
+    end
   end
   
 end
