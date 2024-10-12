@@ -1,28 +1,24 @@
-<h1>Edit</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-8 shadow-none rounded px-0 my-5">
+      <h5 class="text-dark bg-light p-4 mb-0">投稿の編集</h5>
+      <div class="form-body p-4">
+        
+        
+        <% if @post.errors.any? %>
+          <%= @post.errors.count %>件のエラーが発生しました
+          <ul>
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+        
+        <%= render 'public/posts/form', post: @post %>
+        
+        <%= link_to "投稿を削除する", post_path(@post), method: :delete, class: "btn btn-lg btn-block btn-danger mt-4"%>
 
-<% if @post.errors.any? %>
-  <%= @post.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @post.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<%= form_for @post, html: { multipart: true } do |f| %>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+      </div>
+    </div>
   </div>
-  <div>
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-  </div>
-  <div>
-    <%= f.label :image %>
-    <%= f.file_field :image %>
-  </div>
-  <%= f.submit "Update" %>
-<% end %>
-
-<%= link_to "Delete", post_path(@post), method: :delete %>
+</div>

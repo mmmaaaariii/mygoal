@@ -1,36 +1,4 @@
-<div>
-  <%= flash[:notice] %>
-</div>
 
-<div class="card-list-container py-5">
-  <% @groups.each do |group| %>
-  <div class="card w-50 mx-auto mt-4 shadow-lg">
-    <%= link_to group_path(group.id) do %>
-      <%= image_tag group.get_image, class: "card-img-top"; %>
-    <% end %>
-
-    <div class="card-body">
-      <div class="row">
-        <div class="col-2">
-          <%= image_tag group.owner.get_profile_image(45,45), class: "mt-3 rounded-circle"; %>
-        </div>
-
-        <div class="col-10">
-          <p class="card-title">
-            <%= link_to(group_path(group.id), class: "text-dark") do %>
-              <strong><i class="far fa-flag"></i><span> <%= group.owner.name %></span></strong>
-            <% end %>
-          </p>
-
-          <p class="card-text">投稿：<%= group.created_at.strftime('%Y/%m/%d') %></p>
-          <p class="card-text"><%= group.name %></p>
-
-          <%= link_to "編集する", edit_group_path(group) %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <% end %>
-</div>
-
-
+      <h2>Group 一覧</h2>
+     
+     <%= render "public/groups/index", groups: @groups%>

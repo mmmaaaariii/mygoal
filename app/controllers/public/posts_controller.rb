@@ -43,6 +43,7 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
       if @post.update(post_params)
+        flash[:notice] = "更新に成功しました。"
         redirect_to @post
       else
         render :edit
@@ -57,11 +58,7 @@ class Public::PostsController < ApplicationController
   end
 
 
-  def search_results
-    @posts = Post.search(params[:search])
-    @users = User.search(params[:search])
-    render 'search_results'
-  end
+
 
   private
 

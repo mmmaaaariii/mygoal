@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:index, :destroy]
   end
   
-
+  devise_scope :user do
+    post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
+  end
   
   scope module: :public do
     devise_for :users
@@ -20,9 +22,8 @@ Rails.application.routes.draw do
       patch :toggle_status
       resource :favorite, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
-      get 'search_results', on: :collection
     end
-    resources :users, only: [:show, :edit, :update, :destroy]do
+    resources :users, only: [:index, :show, :edit, :update, :destroy]do
       resource :relationships, only: [:create, :destroy]
       get 'relationships/followings'
       get 'relationships/followers'
@@ -32,6 +33,11 @@ Rails.application.routes.draw do
     
     resources :groups, only: [:new, :index, :show, :create, :edit, :update]
     
+    get 'search', to: 'searches#search', as: 'search'
+    
   end
+  
+  
+
 
 end

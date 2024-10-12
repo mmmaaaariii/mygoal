@@ -1,0 +1,10 @@
+<% if @model == 'user' %>
+	<h3> <%= @content %> 検索結果</h3>
+  <%= render 'public/users/index', users: @records %>
+<% elsif @model == 'group' %>
+	<h3> <%= @content %> 検索結果</h3>
+  <%= render 'public/groups/index', groups: @records %>
+<% else %>
+	<h3> <%= @content %> 検索結果</h3>
+  <%= render 'public/posts/index', posts: @records %>
+<% end %>
