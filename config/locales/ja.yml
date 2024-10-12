@@ -1,23 +1,23 @@
-  ja: # 日本語の設定を行う
-    enums: # enumの設定を行う
-      post: # モデル名（Orderモデルに対して）
-        status: # カラム名（payment_methodカラムに対して）
-          draft: "非公開" # enumで番号と紐付けた要素
-          published: "公開" # enumで番号と紐付けた要素
-    activerecord:
-      models:
-        post: "投稿"
-      attributes:
-        user:
-          name: test
-        post:
-          title: "タイトル"
-    errors:
-      messages:
-        record_invalid: 'バリデーションに失敗しました: %{errors}'
-        restrict_dependent_destroy:
-          has_one: "%{record}が存在しているので削除できません"
-          has_many: "%{record}が存在しているので削除できません"
+ja: # 日本語の設定を行う
+  enums: # enumの設定を行う
+    post: # モデル名（Orderモデルに対して）
+      status: # カラム名（payment_methodカラムに対して）
+        draft: "非公開" # enumで番号と紐付けた要素
+        published: "公開" # enumで番号と紐付けた要素
+  activerecord:
+    models:
+      post: "投稿"
+    attributes:
+      user:
+        name: "名前"
+      post:
+        title: "タイトル"
+  errors:
+    messages:
+      record_invalid: 'バリデーションに失敗しました: %{errors}'
+      restrict_dependent_destroy:
+        has_one: "%{record}が存在しているので削除できません"
+        has_many: "%{record}が存在しているので削除できません"
   date:
     abbr_day_names:
     - 日
@@ -28,7 +28,7 @@
     - 金
     - 土
     abbr_month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月
@@ -54,7 +54,7 @@
       long: "%Y年%m月%d日(%a)"
       short: "%m/%d"
     month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月

@@ -1,6 +1,16 @@
 class Public::PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+
+  def index
+    if params[:search]
+      @posts = Post.search(params[:search])
+    else
+      @posts = Post.all
+    end
+  end
+
+
   def new
     @post = Post.new
   end
@@ -46,13 +56,6 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path
   end
 
-  def index
-    if params[:search]
-      @posts = Post.search(params[:search])
-    else
-      @posts = Post.all
-    end
-  end
 
   def search_results
     @posts = Post.search(params[:search])
