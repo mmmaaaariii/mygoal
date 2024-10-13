@@ -1,0 +1,20 @@
+  <div class="container">
+    <div class="row">
+    <div class="col-md-8 offset-md-1">
+      <h2>ユーザー一覧</h2>
+        <table class="table table-striped">
+          <tr>
+            <th></th>
+            <th>ユーザー名</th>
+            <th></th>
+          </tr>
+          <% users.each do |user| %>
+            <tr>
+              <td><%= image_tag user.get_profile_image(50,50) %></td>
+              <td><%= user.name %></td>
+              <td><%= link_to "詳細", user_path(user.id), class: "btn btn-sm btn-success" %></td>
+            </tr>
+          <% end %>
+        </table>
+        </div>
+      </div>

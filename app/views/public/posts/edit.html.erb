@@ -16,7 +16,7 @@
         
         <%= render 'public/posts/form', post: @post %>
         
-        <%= link_to "投稿を削除する", post_path(@post), method: :delete, class: "btn btn-lg btn-block btn-danger mt-4"%>
+        <%= link_to "投稿を削除する", post_path(@post), data: { confirm: '本当に削除しますか？' }, method: :delete, class: "btn btn-lg btn-block btn-danger mt-4"%>
 
       </div>
     </div>

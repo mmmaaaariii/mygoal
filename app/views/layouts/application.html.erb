@@ -32,9 +32,9 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
               <ul class="navbar-nav">
                 <% if user_signed_in? %>
-                  <li class="nav-item"><%= link_to '新規投稿', new_post_path, class: 'nav-link text-dark' %></li>
-                  <li class="nav-item"><%= link_to '投稿一覧', posts_path, class: 'nav-link text-dark' %></li>
-                  <li class="nav-item"><%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-dark' %></li>
+                  <li class="nav-item"><%= link_to 'プロフィール', user_path(current_user.id), class: 'nav-link text-dark' %></li>
+                  <li class="nav-item"><%= link_to '投稿のページ', posts_path, class: 'nav-link text-dark' %></li>
+                  <li class="nav-item"><%= link_to 'グループのページ', groups_path, class: 'nav-link text-dark' %></li>
                   <li class="nav-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %></li>
                 <% else %>
                   <li class="nav-item"><%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %></li>
@@ -55,10 +55,10 @@
             <%= image_tag('logo.png', width: '80pt', height: '80pt') %>
           </div>
           <div class="col-md-8">
-            <h6 class="text-white mt-2 mb-3">Link</h6>
+            <h6 class="text-white mt-2 mb-3"></h6>
             <ul class="p-0 list-unstyled">
               <li>
-                <a href="homes/about" class="text-white-50">サイトについて</a>
+                <%= link_to "サイトについて", about_path, class: 'text-white mt-2 mb-3' %>
               </li>
             </ul>
           </div>

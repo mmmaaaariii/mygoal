@@ -1,50 +1,77 @@
-<h1>投稿詳細</h1>
-  <div>
-    <p><%= image_tag @post.user.get_profile_image(100,100) %></p>
-    <p><%= link_to @post.user.name, user_path(@post.user) %></p>
-    <p><%= @post.content %></p>
-    <p><%= image_tag @post.get_image %></p>
-    <p>LTU: <%= @post.created_at.strftime('%Y/%m/%d') %></p>
-    
-    
-    <% if @post.user == current_user %>
-      <%= link_to "delete", post_path(@post), method: :delete %>
-      <%= link_to "投稿編集", edit_post_path(@post) %>
-    <% end %>
-    
-    <% if @post.favorited_by?(current_user) %>
-      <p>
-        <%= link_to post_favorite_path(@post), method: :delete do %>
-          ♥<%= @post.favorites.count %>
+<div class="container">
+  <div class="row">
+    <div class="col-8 shadow-none rounded px-0 my-5">
+      <h5 class="text-dark bg-light p-4 mb-0">投稿の詳細</h5>
+      <div class="form-body p-4">
+        <div class="py-3 bg-light">
+          <div class="container mx-auto">
+            <%= image_tag @post.get_image %>
+            <div class="row mx-auto">
+              <div class="col-2">
+                <%= image_tag @post.user.get_profile_image(45,45), class: "mt-3 rounded-circle" %>
+              </div>
+              <div class="col-11">
+                <p>
+                  <%= link_to user_path(@post.user), class: "text-dark" do %>
+                    <strong><i class="far fa-flag"></i><%= @post.user.name %></strong>
+                  <% end %>
+                </p>
+                <p>投稿日：
+                  <%= @post.created_at.strftime('%Y/%m/%d') %>
+                </p>
+                <p>
+                  <%= @post.content %>
+                </p>
+                <div class="col-0">
+                  <% if current_user %>
+                    <span>
+                      <%= render "public/favorites/favorite_btn", post: @post %>｜
+                    </span>
+                  <% end %>
+                  <span>
+                    <%= link_to "#{@post.post_comments.count} コメント", post_path(@post.id), class: "text-dark" %>｜
+                  </span>
+                  <% if @post.user == current_user %>
+                    <span>
+                      <%= link_to "投稿を編集", edit_post_path(@post) %>
+                    </span>
+                  <% end %>
+                  <br>
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <% @post.post_comments.each do |post_comment| %>
+          <p>
+            <%= image_tag post_comment.user.get_profile_image(30,30) %>
+            <%= post_comment.user.name %>
+          </p>
+          <p>
+            <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+          </p>
+          <p>
+            <%= post_comment.comment %>
+          </p>
+          <% if post_comment.user == current_user %>
+            <%= link_to "削除する", post_post_comment_path(@post, post_comment), method: :delete, class: 'btn btn-danger' %>
+          </p>
+          <% end %>
         <% end %>
-      </p>
-      <% else %>
-      <p>
-        <%= link_to post_favorite_path(@post), method: :post do %>
-          ♡<%= @post.favorites.count %>
-        <% end %>
-      </p>  
-    <% end %>
+
+        <div>
+          <%= form_with model: [@post, @post_comment] do |f| %>
+            <p>
+              <%= f.text_area :comment, rows: '5', placeholder: "コメントする" %>
+            </p>
+            <p>
+              <%= f.submit "送信", class: 'btn btn-success' %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-  
-  <div>
-    <p>Comments：<%= @post.post_comments.count %></p>
-    <% @post.post_comments.each do |post_comment| %>
-      <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-      <%= post_comment.user.name %>
-      <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-      <% if post_comment.user == current_user %>
-      <%= link_to "削除する", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
-      <% end %>
-    <% end %>
-  </div>
-  
-  <div>
-    <%= form_with model: [@post, @post_comment] do |f| %>
-      <%= f.text_area :comment, rows: '5', placeholder: "Leave a comment" %>
-      <%= f.submit "comment" %>
-    <% end %>
-  </div>
-  
-  
-<div>
+</div>

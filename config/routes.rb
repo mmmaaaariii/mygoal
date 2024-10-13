@@ -6,7 +6,7 @@ Rails.application.routes.draw do
  
   namespace :admin do
     get 'dashboards', to: 'dashboards#index'
-    resources :users, only: [:index, :destroy]
+    resources :users, only: [:index, :show, :destroy]
     resources :post_comments, only: [:index, :destroy]
   end
   
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   scope module: :public do
     devise_for :users
     root to: "homes#top"
-    get 'homes/about', to: 'homes#about', as: :about
+    get "homes/about", to: "homes#about", as: "about"
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]do
       patch :toggle_status
       resource :favorite, only: [:create, :destroy]

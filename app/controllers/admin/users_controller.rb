@@ -6,6 +6,12 @@ class Admin::UsersController < ApplicationController
         @users = User.all
     end
     
+    def show
+        @user = User.find(params[:id])
+        @posts = @user.posts.page(params[:page])
+        @followings = @user.followings
+    end
+    
     def destroy
         @user = User.find(params[:id])
         @user.destroy

@@ -1,8 +1,20 @@
-<div class='container'>
-  <div class='row'>
-    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-      <h3>Editing Group</h3>
-        <%= render 'public/shared/error_messages', resource: @group %>
+<div class="container">
+  <div class="row">
+    <div class="col-8 shadow-none rounded px-0 my-5">
+      <h5 class="text-dark bg-light p-4 mb-0">グループの編集</h5>
+      <div class="form-body p-4">
+        
+        
+        <% if @group.errors.any? %>
+          <%= @group.errors.count %>件のエラーが発生しました
+          <ul>
+            <% @group.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
         <%= render 'form', group: @group %>
+      </div>
+    </div>
   </div>
 </div> 

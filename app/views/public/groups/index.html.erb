@@ -1,4 +1,14 @@
+<div>
+  <%= flash[:notice] %>
+</div>
 
-      <h2>Group 一覧</h2>
-     
-     <%= render "public/groups/index", groups: @groups%>
+<div class="container">
+  <div class="row">
+    <div class="col-8 shadow-none rounded px-0 my-5">
+      <h5 class="text-dark bg-light p-4 mb-0">グループの一覧 </h5>
+
+        <%= render "public/groups/index", groups: @groups%>
+  
+    </div>
+  </div>
+</div> 

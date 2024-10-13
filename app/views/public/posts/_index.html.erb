@@ -1,3 +1,9 @@
+<br>
+<div>
+   <%= link_to "投稿する", new_post_path, class: 'btn btn-info' %>
+</div>
+<br>
+
 <div class="py-3 bg-light">
   <% posts.reverse.each do |post| %>
   <div class="container mx-auto">
@@ -12,12 +18,12 @@
 
         <div class="col-11">
           <p>
-            <%= link_to(post_path(post.id), class: "text-dark") do %>
+            <%= link_to(user_path(post.user), class: "text-dark") do %>
               <strong><i class="far fa-flag"></i><%= post.user.name %></span></strong>
             <% end %>
           </p>
 
-          <p>投稿：
+          <p>投稿日：
             <%= post.created_at.strftime('%Y/%m/%d') %>
           </p>
           

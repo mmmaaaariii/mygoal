@@ -1,11 +1,9 @@
-<div>
-  <%= flash[:notice] %>
-</div>
-
 <div class="container">
   <div class="row">
     <div class="col-8 shadow-none rounded px-0 my-5">
       <h5 class="text-dark bg-light p-4 mb-0">プロフィール</h5>
+
+    <p><%= link_to '削除', admin_user_path(@user), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-danger" %> </p>
 
     <div>
       <%= image_tag @user.get_profile_image(70,70) %>
@@ -16,12 +14,11 @@
         <br>
         <br>
         <p>
-          <% if @user == current_user %>
-            <% unless @user.guest_user?%>
-              <%= link_to "プロフィールを変更する", edit_user_path(@user), class: 'btn btn-success' %>
+          <!--<% if @user == current_user %>-->
+          <!--  <% unless @user.guest_user?%>-->
               <!--<%= render 'public/relationships/follow_list',followings:@followings %>-->
-            <% end %>
-          <% end %>
+          <!--  <% end %>-->
+          <!--<% end %>-->
         </p>
       </div>
       <br>
