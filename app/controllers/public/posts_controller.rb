@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticate_user!, only: [:show, :index, :new, :create, :edit, :update, :destroy]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def index
     if params[:search]
@@ -9,7 +10,6 @@ class Public::PostsController < ApplicationController
       @posts = Post.all
     end
   end
-
 
   def new
     @post = Post.new
@@ -33,32 +33,25 @@ class Public::PostsController < ApplicationController
     @post_comment = PostComment.new
   end
 
-
   def edit
     @post = Post.find(params[:id])
   end
 
-
-
   def update
     @post = Post.find(params[:id])
-      if @post.update(post_params)
-        flash[:notice] = "更新に成功しました。"
-        redirect_to @post
-      else
-        render :edit
-      end
+    if @post.update(post_params)
+      flash[:notice] = "更新に成功しました。"
+      redirect_to @post
+    else
+      render :edit
+    end
   end
-
 
   def destroy
     post = Post.find(params[:id])
     post.destroy
     redirect_to posts_path
   end
-
-
-
 
   private
 
@@ -67,7 +60,12 @@ class Public::PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:id] || params[:post_id])
+    @post = Post.find_by_id(params[:id] || params[:post_id])
   end
-
+  
+  def correct_user
+    if @post&.user != current_user
+      redirect_to root_path
+    end
+  end
 end

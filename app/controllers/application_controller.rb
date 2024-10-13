@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!, except: [:top], unless: :admin_controller?
-  before_action :configure_authentication
 
     def index
       @articles = Article.all.search(params[:search])
@@ -17,12 +15,10 @@ class ApplicationController < ActionController::Base
     end
 
     def admin_controller?
-    self.class.module_parent_name == 'Admin'
+      self.class.module_parent_name == 'Admin'
     end
 
     def action_is_public?
-    controller_name == 'homes' && action_name == 'top'
+      controller_name == 'homes' && action_name == 'top'
     end
-
-
 end

@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
-  before_action :is_matching_login_user, only: [:edit, :update]
-  before_action :ensure_guest_user, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:show, :index, :edit, :update, :destroy]
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
+  before_action :ensure_guest_user, only: [:edit, :update, :destroy]
 
   def show
     @user = User.find(params[:id])
@@ -29,7 +30,7 @@ class Public::UsersController < ApplicationController
   def destroy
     user = current_user
     user.destroy
-    redirect_to user_path(user)
+    redirect_to root_path
   end
 
 

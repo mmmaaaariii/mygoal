@@ -1,4 +1,6 @@
 class Public::PostCommentsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:destroy]
   
   def create
     post = Post.find(params[:post_id])
@@ -9,7 +11,7 @@ class Public::PostCommentsController < ApplicationController
   end
   
   def destroy
-    PostComment.find(params[:id]).destroy
+    @post_comment&.destroy
     redirect_to post_path(params[:post_id])
   end
   
@@ -19,6 +21,8 @@ class Public::PostCommentsController < ApplicationController
     params.require(:post_comment).permit(:comment)
   end
   
-  
-  
+  def correct_user
+    @post_comment = current_user.post_comments.find_by_id(params[:id])
+    redirect_to root_path unless @post_comment
+  end
 end
