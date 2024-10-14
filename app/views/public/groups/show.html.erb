@@ -1,15 +1,41 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
 <div class='col-md-8 offset-md-1'>
-      <h2>グループ</h2>
-      <table class='table table-hover table-inverse'>
-        <tr>
-          <td><%= image_tag @group.get_image, size: '50x50' %></td>
-          <td><%= @group.name %></td>
-          <td><%= @group.introduction %></td>
-          <td>
-            <% if @group.is_owned_by?(current_user) %>
-              <%= link_to '編集する', edit_group_path(@group), class: "btn btn-sm btn-success" %>
-            <% end %>
-          </td>
-        </tr>
-      </table>
+  <br>
+  <h2>グループの詳細</h2>
+  <br>
+  <table class='table table-hover table-inverse'>
+    <thead>
+      <tr>
+        <th></th>
+        <th>グループ</th>
+        <th>内容</th>
+        <th>メンバー</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tr>
+      <td><%= image_tag @group.get_image, size: '50x50' %></td>
+      <td><%= @group.name %></td>
+      <td><%= @group.introduction %></td>
+      <td>
+        <% @group.users.each do |user| %>
+         <li style="list-style: none;"><%= user.name %></li>
+        <% end %>
+      </td>
+      <td>
+        <% if @group.is_owned_by?(current_user) %>
+          <%= link_to '変更する', edit_group_path(@group), class: "btn btn-sm btn-success" %>
+      <td><%= link_to '連絡する', new_message_group_path(@group), class: "btn btn-sm btn-info" %></td>
+        <% elsif @group.includesUser?(current_user)%>
+          <%= link_to '脱退申請', group_group_users_path(@group), method: :delete, class: "btn btn-sm btn-danger" %>
+        <% else %>
+          <%= link_to '参加申請', group_group_users_path(@group), method: :post, class: "btn btn-sm btn-success" %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
 </div>

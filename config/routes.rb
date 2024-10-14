@@ -31,9 +31,19 @@ Rails.application.routes.draw do
       get 'followers' => 'relationships#followers', as: 'followers'
     end
     
-    resources :groups, only: [:new, :index, :show, :create, :edit, :update]
+    resources :groups do
+      resource :group_users, only: [:create, :destroy]
+      member do
+        get 'new_group_message', to: 'groups#new_group_message', as: "new_message"
+        post 'group_messages', to: 'groups#create_group_message', as: "messages"
+      end
+    end
     
     get 'search', to: 'searches#search', as: 'search'
+    
+    if Rails.env.development?
+      mount LetterOpenerWeb::Engine, at: "/letter_opener"
+    end
     
   end
   

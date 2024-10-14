@@ -1,0 +1,23 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
+<div class="row">
+  <div class="col-md-4 offset-md-4">
+    <%= form_with scope: :message, url: messages_group_path(@group) do |f| %>
+      <div class="form-group">
+        <%= f.label :件名 %>
+        <%= f.text_field :title, class: "form-control" %>
+      <div>
+        
+      <div class="form-group">
+        <%= f.label :本文 %>
+        <%= f.text_area :message, class: "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.submit "送信", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

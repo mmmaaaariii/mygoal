@@ -1,0 +1,5 @@
+<% if current_user.join_group?(group) %>
+  <%= link_to '脱退申請', group_group_users_path(group), method: :delete, class: "btn btn-sm btn-danger" %>
+<% else %>
+  <%= link_to '参加申請', group_group_users_path(group), method: :post, class: "btn btn-sm btn-success" %>
+<% end %>

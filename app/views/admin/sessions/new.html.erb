@@ -1,3 +1,7 @@
+<div>
+  <%= flash[:notice] %>
+</div>
+
 <h2>管理者ログイン</h2>
 
 <%= form_with model: @admin, url: session_path(resource_name), local: true do |f| %>

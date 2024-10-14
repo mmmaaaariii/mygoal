@@ -22,9 +22,10 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
   #グループ機能で使う
+  has_many :groups, dependent: :destroy, class_name: "Group", foreign_key: "owner_id"
   has_many :group_users, dependent: :destroy
-
-
+  has_many :join_groups, through: :group_users, source: :group
+  
 
   has_one_attached :profile_image
 
@@ -59,6 +60,10 @@ class User < ApplicationRecord
 
   def favorite?(post)
     self.favorite_posts.include?(post)
+  end
+  
+  def join_group?(group)
+    self.join_groups.include?(group)
   end
 
 
