@@ -5,12 +5,10 @@
 <div class="container">
   <div class="row">
     <div class="col-8 shadow-none rounded px-0 my-5">
-      
       <h5 class="text-dark bg-light p-4 mb-0">プロフィール</h5>
       <br>
     <div>
       <%= image_tag @user.get_profile_image(70,70) %>
-      
         <span>
           <strong><i class="far fa-flag"></i><%= @user.name %></strong>
         </span>
@@ -20,15 +18,36 @@
           <% if @user == current_user %>
             <% unless @user.guest_user?%>
               <%= link_to "プロフィールを変更する", edit_user_path(@user), class: 'btn btn-success' %>
-              <!--<%= render 'public/relationships/follow_list',followings:@followings %>-->
             <% end %>
           <% end %>
         </p>
+        <br>
+          <!--  <a class="nav-link follow_list" href="#">フォローリスト<%= render 'public/relationships/follow_list',followings:@followings %></a>-->
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="item1-tab" data-toggle="tab" href="#item1" role="tab" aria-controls="item1" aria-selected="true">
+              グループマスター
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="item2-tab" data-toggle="tab" href="#item2" role="tab" aria-controls="item2" aria-selected="false">
+              参加グループ
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="item1" role="tabpanel" aria-labelledby="item1-tab">
+            <%= render 'public/groups/index', groups: @groups %>
+          </div>
+          <div class="tab-pane fade" id="item2" role="tabpanel" aria-labelledby="item2-tab">
+            <%= render 'public/groups/index', groups: @join_groups %>
+          </div>
+        </div>
+      
       </div>
       <br>
       <br>
        <h5 class="text-dark bg-light p-4 mb-0">投稿一覧</h5>
-      
        <%= render 'public/posts/index', posts: @posts %>
     </div>
   </div>

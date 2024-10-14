@@ -7,6 +7,8 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts.page(params[:page])
     @followings = @user.followings
+    @groups = @user.groups
+    @join_groups = @user.join_groups
   end
 
   def index
