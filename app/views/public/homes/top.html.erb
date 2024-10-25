@@ -4,16 +4,21 @@
 
 <div class="py-3 bg-light">
   <div class="container mx-auto">
-    <div class="row">
-      <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary btn-lg btn-block mt-4 sign_in", method: :post %>
-    </div>
-
-    <div class="row">
-      <%= link_to "ログイン",new_user_session_path, class: "btn btn-info btn-lg btn-block mt-4 sign_in" %>
-    </div>
-    <div class="row">
-      <%= link_to "新規登録",new_user_registration_path, class: "btn btn-success btn-lg btn-block mt-4 sign_up" %>
-    </div>
+    <% if user_signed_in? %>
+      <div class="row">
+        <%= link_to "ログアウト", destroy_user_session_path, class: "btn btn-secondary btn-lg btn-block mt-4 sign_out", method: :delete %>
+      </div>
+    <% else %>
+      <div class="row">
+        <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary btn-lg btn-block mt-4 sign_in", method: :post %>
+      </div>
+      <div class="row">
+        <%= link_to "ログイン",new_user_session_path, class: "btn btn-info btn-lg btn-block mt-4 sign_in" %>
+      </div>
+      <div class="row">
+        <%= link_to "新規登録",new_user_registration_path, class: "btn btn-success btn-lg btn-block mt-4 sign_up" %>
+      </div>
+    <% end %>
   </div>
 </div>
 <br>
