@@ -2,10 +2,15 @@
   <%= flash[:notice] %>
 </div>
 
+<head>
+</head>
+<body>
+  <h2>管理者メニュー</h2>
+  <ul>
+      <li><%= link_to 'ユーザー一覧', admin_users_path %></li>
+      <li><%= link_to 'コメント一覧', admin_post_comments_path %></li>
+      <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+  </ul>
+</body>
 
-<h2>管理者メニュー</h2>
-<ul>
-    <li><%= link_to 'ユーザー一覧', admin_users_path %></li>
-    <li><%= link_to 'コメント一覧', admin_post_comments_path %></li>
-    <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
-</ul>
+# ヘッダーと取り付ける
